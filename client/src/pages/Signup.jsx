@@ -18,8 +18,10 @@ function Signup() {
          
         if(datas.status === 200){
           toast.success(datas.data.message)
-          navigate("/Home")
           setdata({})
+          setTimeout(()=>{
+            navigate("/Home")
+          },2000)
         }
 
 
@@ -103,7 +105,7 @@ function Signup() {
           </a>
         </p>
       </div>
-      <ToastContainer />
+      <ToastContainer autoClose={2000} />
     </div>
   );
 }
