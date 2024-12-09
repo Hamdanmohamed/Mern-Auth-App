@@ -19,7 +19,7 @@ function Login() {
       e.preventDefault();
       try {
 
-        const datas = await axios.post("http://localhost:5000/api/auth/signin",data)
+        const datas = await axios.post("http://localhost:5000/api/auth/signin",data,{ withCredentials: true } )
         console.log(datas);
         
         if(datas.status === 200) {
@@ -30,6 +30,7 @@ function Login() {
         }
         
       } catch (error) {
+        toast.error(error.response.data.message)
         
       }
     }

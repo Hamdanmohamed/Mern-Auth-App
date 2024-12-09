@@ -51,7 +51,8 @@ export const addSigninUser = async (req, res) => {
 
   res
     .cookie("token", token, {
-      httpOnly: true,
+    //   httpOnly: true,
+
       maxAge: 15 * 24 * 60 * 60 * 1000, // Cookie expiration set to 15 days in milliseconds
     })
     .status(200)
