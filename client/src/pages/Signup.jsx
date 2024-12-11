@@ -8,7 +8,7 @@ function Signup() {
   const [data, setdata] = useState({});
 
 
-
+  
   const handleSubmit = async(e)=>{
     
     

@@ -43,6 +43,8 @@ export const addSigninUser = async (req, res) => {
     return res.status(400).json({ message: "invalid password" });
   }
 
+  const {password:hashedPassword,...userdata} = validUser._doc
+
   const token = jwt.sign(
     { id: validUser._id },
     process.env.JWT_SECRET,
@@ -51,10 +53,9 @@ export const addSigninUser = async (req, res) => {
 
   res
     .cookie("token", token, {
-    //   httpOnly: true,
-
+      httpOnly: true,
       maxAge: 15 * 24 * 60 * 60 * 1000, // Cookie expiration set to 15 days in milliseconds
     })
     .status(200)
-    .json({ message: "user logged in successfully" });
+    .json({ message: "user logged in successfully", userdata });
 };

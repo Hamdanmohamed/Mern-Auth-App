@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Logout from "../pages/Logout";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
   const [isLogin, setIsLogin] = useState(true);
+  const user = useSelector((state) => state.user)
 
   const toggleButton = () => {
     // setIsLogin(()=>(!isLogin)); 
     setIsLogin(!isLogin); 
   };
 
-  return (
+  return user ? (
+    <Logout />
+  ) : (
     <header className="flex justify-between items-center p-8 bg-gray-800 text-white">
       <div>
         <h1 className="text-3xl font-bold font-mono">MERN Auth Application</h1>
@@ -24,7 +29,9 @@ export default function Navbar() {
         >
           {isLogin ? "Log In" : "Sign Up"}
         </Link>
+        
       </div>
     </header>
   );
+  
 }

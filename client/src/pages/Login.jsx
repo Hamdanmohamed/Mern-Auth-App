@@ -3,10 +3,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast,ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { setUser } from "../redux/slices/userslice";
+import { useDispatch } from "react-redux";
 
 // src/Login.jsx
 function Login() {
     const navigate = useNavigate()
+    const dispatch = useDispatch();
     const [data,setData] = useState({})
 
     const handlechangedata = (e) => {
@@ -19,10 +22,11 @@ function Login() {
       e.preventDefault();
       try {
 
-        const datas = await axios.post("http://localhost:5000/api/auth/signin",data,{ withCredentials: true } )
+        const datas = await axios.post("http://localhost:5000/api/auth/signin",data,{withCredentials:true} )
         console.log(datas);
         
         if(datas.status === 200) {
+          dispatch(setUser(datas.data.userdata))
           toast.success(datas.data.message)
           setTimeout(() => {
             navigate("/Home")
